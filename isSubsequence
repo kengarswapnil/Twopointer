@@ -1,0 +1,30 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+class Solution {
+    public static boolean isSubsequence(String s,String k){
+        
+        int i=0,j=0;
+        while(i < s.length() && j < k.length()){
+            
+            i++;
+        }
+        j++;
+        
+    return i == s.length();
+  
+    }
+      
+    
+
+
+    public static void main(String[] args) {
+        String s = "abc";
+        String k = "ahbgdc";
+
+        System.out.println(isSubsequence(s, k)); // Output: true
+
+        String s2 = "axc";
+        System.out.println(isSubsequence(s2, k)); // Output: false
+    }
+}
