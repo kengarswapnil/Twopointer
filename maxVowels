@@ -1,0 +1,27 @@
+class Solution {
+    public int maxVowels(String s, int k) {
+        int maxVowels = 0, currentVowels = 0;
+        String vowels = "aeiou";
+
+        // Count vowels in the first window of size k
+        for (int i = 0; i < k; i++) {
+            if (vowels.indexOf(s.charAt(i)) != -1) {
+                currentVowels++;
+            }
+        }
+        maxVowels = currentVowels;
+
+        // Slide the window across the string
+        for (int i = k; i < s.length(); i++) {
+            if (vowels.indexOf(s.charAt(i)) != -1) {
+                currentVowels++; // Incoming character is a vowel
+            }
+            if (vowels.indexOf(s.charAt(i - k)) != -1) {
+                currentVowels--; // Outgoing character is a vowel
+            }
+            maxVowels = Math.max(maxVowels, currentVowels);
+        }
+
+        return maxVowels;
+    }
+}
