@@ -1,0 +1,45 @@
+import java.util.*;
+
+class Solution {
+    public String predictPartyVictory(String senate) {
+        int rCount = 0, dCount = 0, banR = 0, banD = 0;
+        Queue<Character> queue = new LinkedList<>();
+
+        // Count initial senators and add them to the queue
+        for (char c : senate.toCharArray()) {
+            queue.add(c);
+            if (c == 'R') rCount++;
+            else dCount++;
+        }
+
+        // Process rounds until one party is eliminated
+        while (rCount > 0 && dCount > 0) {
+            char current = queue.poll();
+            if (current == 'R') {
+                if (banR > 0) { // 'R' is banned
+                    banR--;
+                    rCount--;
+                } else { // 'R' bans 'D'
+                    banD++;
+                    queue.add('R');
+                }
+            } else {
+                if (banD > 0) { // 'D' is banned
+                    banD--;
+                    dCount--;
+                } else { // 'D' bans 'R'
+                    banR++;
+                    queue.add('D');
+                }
+            }
+        }
+
+        return rCount > 0 ? "Radiant" : "Dire";
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String senate = "RDD"; // Example input
+        System.out.println(sol.predictPartyVictory(senate)); // Output: "Dire"
+    }
+}
